@@ -7,6 +7,7 @@ class Sidebar extends Component {
   state = {};
 
   toggleMenuState(menuState) {
+    console.log(menuState)
     if (this.state[menuState]) {
       this.setState({[menuState] : false});
     } else if(Object.keys(this.state).length === 0) {
@@ -55,7 +56,7 @@ class Sidebar extends Component {
             <span className="nav-link">Menu</span>
           </li>
           <li className={ this.isPathActive('/basic-records') ? 'nav-item menu-items active' : 'nav-item menu-items' }>
-            <div className={ this.state.basicRecordsOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('basicRecords') } data-toggle="collapse">
+            <div className={ this.state.basicRecordsOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('basicRecordsOpen') } data-toggle="collapse">
               <span className="menu-title">Basic Records</span>
               <i className="menu-arrow"></i>
             </div>
@@ -63,6 +64,7 @@ class Sidebar extends Component {
               <div>
                 <ul className="nav flex-column sub-menu">
                   <li className="nav-item"><Link className={ this.isPathActive('/basic-records/agent-type') ? 'nav-link active' : 'nav-link' } to="/basic-records/agent-type">Agent Type</Link></li>
+                  <li className="nav-item"><Link className={ this.isPathActive('/basic-records/agent-specialty') ? 'nav-link active' : 'nav-link' } to="/basic-records/agent-specialty">Agent Specialty</Link></li>
                   <li className="nav-item"> <Link className={ this.isPathActive('/basic-records/process-goal') ? 'nav-link active' : 'nav-link' } to="/basic-records/process-goal">Process Goal</Link></li>
                 </ul>
               </div>

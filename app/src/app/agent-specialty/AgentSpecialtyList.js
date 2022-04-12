@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import { Modal, Form, Alert } from 'react-bootstrap';
-import AgentTypeService from '../apps/services/AgentTypeService';
+import { Modal, Form } from 'react-bootstrap';
+import AgentSpecialtyService from '../apps/services/AgentSpecialtyService';
 import { Truncate } from '../apps/util/Truncate';
 
 
-export class AgentTypeList extends Component {
+export class AgentSpecialtyList extends Component {
 
     constructor(props){
         super(props)
         this.state = {
           modalShow: false,
-          agentType: {},
-          agentTypes: [],
+          agentSpecialty: {},
+          agentSpecialties: [],
           alerts: []
         }
 
@@ -20,41 +20,41 @@ export class AgentTypeList extends Component {
     }
     
     componentDidMount(){
-       this.loadAgentTypes();
+       this.loadAgentSpecialties();
     }
 
-    async loadAgentTypes(){
+    async loadAgentSpecialties(){
         try {
-          let ret = await AgentTypeService.list();
-          this.setState({agentTypes: ret.data, agentType: {}});
+          let ret = await AgentSpecialtyService.list();
+          this.setState({agentSpecialties: ret.data, agentSpecialty: {}});
         } catch(error) {
           console.log(error)
           alert("Não foi possível listar")
         }
     }
 
-    async deleteAgentType(id){
+    async deleteAgentSpecialty(id){
         try {
-          let ret = await AgentTypeService.delete(id);
-          this.loadAgentTypes();
+          let ret = await AgentSpecialtyService.delete(id);
+          this.loadAgentSpecialties();
         } catch(error) {
           console.log(error)
           alert("Não foi possivel excluir!")
         }
     }
 
-    async createAgentType() {
+    async createAgentSpecialty() {
         try {
-            let agentType = this.state.agentType;
+            let agentSpecialty = this.state.agentSpecialty;
             let ret = null;
-            if (agentType.id) {
-                ret = await AgentTypeService.edit(agentType);
+            if (agentSpecialty.id) {
+                ret = await AgentSpecialtyService.edit(agentSpecialty);
             } else {
-                ret = await AgentTypeService.create(agentType);
+                ret = await AgentSpecialtyService.create(agentSpecialty);
             }
             
             if (ret.status === 200 ||  ret.status === 201) {
-                this.loadAgentTypes();
+                this.loadAgentSpecialties();
                 this.showModal(false)
             }
             
@@ -64,11 +64,11 @@ export class AgentTypeList extends Component {
         }
     }
 
-    async editAgentType(id) {
+    async editAgentSpecialty(id) {
         try {
-            let ret = await AgentTypeService.getOne(id)
+            let ret = await AgentSpecialtyService.getOne(id)
             if (ret.status === 200) {
-                this.setState({agentType: ret.data})
+                this.setState({agentSpecialty: ret.data})
                 this.showModal(true)
             }            
          } catch(error) {
@@ -79,7 +79,7 @@ export class AgentTypeList extends Component {
 
     showModal(val) {
         if (!val){
-            this.setState({agentType: {}})
+            this.setState({agentSpecialty: {}})
         }
         this.setState({modalShow: val})        
     }
@@ -87,14 +87,14 @@ export class AgentTypeList extends Component {
     handleChange(event) {
         const obj = event.target
         if (obj.id === 'agentNameInput') {
-            let agent = this.state.agentType
+            let agent = this.state.agentSpecialty
             agent.name = obj.value
-            this.setState({agentType: agent})
+            this.setState({agentSpecialty: agent})
         }
         if (obj.id === 'agentDescriptionInput') {
-            let agent = this.state.agentType
+            let agent = this.state.agentSpecialty
             agent.description = obj.value
-            this.setState({agentType: agent})
+            this.setState({agentSpecialty: agent})
         }
     }
 
@@ -106,7 +106,7 @@ export class AgentTypeList extends Component {
        
             <div className="card-body">
             <div className="d-flex flex-row justify-content-between">
-                <h4 className="card-title">Agent Type</h4>
+                <h4 className="card-title">Agent Specialty</h4>
                 <button type="button" className="btn btn-success" onClick={ () => this.showModal(true) }>
                     <i className="mdi mdi-plus-circle-outline"></i>
                     Add
@@ -123,17 +123,17 @@ export class AgentTypeList extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.state.agentTypes.map( type => (
-                    <tr key={ "agenttype-id-"+type.id } >
-                        <td> { type.id } </td>
-                        <td> { type.name } </td>
-                        <td> <Truncate text={type.description} size={20}/> </td>
+                    {this.state.agentSpecialties.map( specialty => (
+                    <tr key={ "agentspecialty-id-"+specialty.id } >
+                        <td> { specialty.id } </td>
+                        <td> { specialty.name } </td>
+                        <td> <Truncate text={specialty.description} size={20}/> </td>
                         <td>
                         <div className="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" className="btn btn-primary" onClick={() => this.editAgentType(type.id)}>
+                            <button type="button" className="btn btn-primary" onClick={() => this.editAgentSpecialty(specialty.id)}>
                                 <i className="mdi mdi-lead-pencil"></i>
                             </button>
-                            <button type="button" className="btn btn-danger" onClick={() => this.deleteAgentType(type.id)} >
+                            <button type="button" className="btn btn-danger" onClick={() => this.deleteAgentSpecialty(specialty.id)} >
                                 <i className="mdi mdi-delete-forever"></i>
                             </button>
                         </div>
@@ -149,19 +149,19 @@ export class AgentTypeList extends Component {
             <div className="card">
                 <div className="card-body">
                 <h4 className="card-title">
-                    { this.state.agentType.id ? "(#"+this.state.agentType.id+") " : "" } 
-                    Agent Type 
-                    { this.state.agentType.name ? " - "+this.state.agentType.name : ""} 
+                    { this.state.agentSpecialty.id ? "(#"+this.state.agentSpecialty.id+") " : "" } 
+                    Agent Specialty
+                    { this.state.agentSpecialty.name ? " - "+this.state.agentSpecialty.name : ""} 
                 </h4>
                 <div className="table-responsive">
                     <Form onSubmit={ event => event.preventDefault() }>
                         <Form.Group>
                             <label htmlFor="agentNameInput">Name</label>
-                            <Form.Control type="text" id="agentNameInput" placeholder="Agent Type Name" value={this.state.agentType.name || ''} onChange={this.handleChange} required />
+                            <Form.Control type="text" id="agentNameInput" placeholder="Agent Specialty Name" value={this.state.agentSpecialty.name || ''} onChange={this.handleChange} required />
                         </Form.Group>
                         <Form.Group>
                             <label htmlFor="agentDescriptionInput">Description</label>
-                            <Form.Control as="textarea" id="agentDescriptionInput" row={4} value={this.state.agentType.description || ''} onChange={this.handleChange}/>
+                            <Form.Control as="textarea" id="agentDescriptionInput" row={4} value={this.state.agentSpecialty.description || ''} onChange={this.handleChange}/>
                         </Form.Group>
                     </Form>
                 </div>
@@ -172,7 +172,7 @@ export class AgentTypeList extends Component {
                     <i className="mdi mdi-window-close"></i>
                     Cancel
                 </button>
-                <button type="button" className="btn btn-primary" onClick={ () => this.createAgentType()}>
+                <button type="button" className="btn btn-primary" onClick={ () => this.createAgentSpecialty()}>
                     <i className="mdi mdi-content-save"></i>
                     Save
                 </button>
@@ -184,4 +184,4 @@ export class AgentTypeList extends Component {
 
 }
 
-export default AgentTypeList;
+export default AgentSpecialtyList;
