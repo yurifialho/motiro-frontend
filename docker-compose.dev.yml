@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  motiro-frontend:
+    extends:
+      file: ./docker-compose.yml
+      service: motiro-frontend
+    volumes:
+      - .:/app:cached
