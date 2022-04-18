@@ -6,3 +6,9 @@ services:
     container_name: motiro-frontend
     ports:
       - "3000:3000"
+    networks:
+      - motiro-nw
+
+networks: 
+  motiro-nw:
+    name: "motiro-nw"

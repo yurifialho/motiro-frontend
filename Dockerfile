@@ -1,5 +1,5 @@
 # pull official base image
-FROM node:alpine3.15
+FROM node:12.18.2
 
 # set working directory
 WORKDIR /app
@@ -12,12 +12,14 @@ ENV PATH /app/node_modules/.bin:$PATH
 COPY ./app/package.json ./
 COPY ./app/package-lock.json ./
 
-RUN apk add --no-cache --virtual .gyp \
-        python2 \
-        make \
-        g++ \
-    && npm install \
-    && apk del .gyp
+#RUN apk add --no-cache --virtual python make g++
+
+#RUN apk add --no-cache --virtual .gyp \
+#        python2 \
+#        make \
+#        g++ \
+#    && npm install \
+#    && apk del .gyp
 
 # Installs all node packages
 RUN npm install 

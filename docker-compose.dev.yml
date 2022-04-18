@@ -5,4 +5,8 @@ services:
       file: ./docker-compose.yml
       service: motiro-frontend
     volumes:
-      - .:/app:cached
+      - ./app:/app:cached
+
+networks: 
+  motiro-nw:
+    name: "motiro-nw"
