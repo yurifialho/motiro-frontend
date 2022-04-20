@@ -38,7 +38,7 @@ export class ProcessDashboard extends Component {
     async createSimpleProcess() {
         try {
             let ret = await ProcessService.create({name: this.state.processName})
-            if (ret.status == 201) {
+            if (ret.status === 201) {
                 this.setState({processName:""})
                 await this.loadProcess()
             }
@@ -51,7 +51,7 @@ export class ProcessDashboard extends Component {
     async deleteProcess(id) {
         try{
             let ret = await ProcessService.delete(id);
-            if (ret.status == 204){
+            if (ret.status === 204){
                 await this.loadProcess()
             }
         } catch (error) {
@@ -81,7 +81,7 @@ export class ProcessDashboard extends Component {
     async createSimpleaAgent() {
         try {
             let ret = await AgentService.create({name: this.state.agentName})
-            if (ret.status == 201) {
+            if (ret.status === 201) {
                 this.setState({agentName:""})
                 await this.loadAgents()
             }
@@ -94,7 +94,7 @@ export class ProcessDashboard extends Component {
     async deleteAgent(id) {
         try{
             let ret = await AgentService.delete(id);
-            if (ret.status == 204){
+            if (ret.status === 204){
                 await this.loadAgents()
             }
         } catch (error) {
@@ -104,11 +104,11 @@ export class ProcessDashboard extends Component {
     }
 
     handleChange(event) {
-        if (event.target.id == "processName") {
+        if (event.target.id === "processName") {
             this.setState({ processName: event.target.value })
         }
 
-        if (event.target.id == "agentName") {
+        if (event.target.id === "agentName") {
             this.setState({ agentName: event.target.value })
         }
         

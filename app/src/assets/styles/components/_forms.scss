@@ -24,10 +24,11 @@
   padding: 0.625rem 0.6875rem;
   background-color: $input-bg;
   border-radius: 2px;
-  color: #ffffff;
+  color: #ffffffcd;
   &:focus {
     border: 1px solid rgba(71, 164, 71, 0.5);
     background-color: $input-bg;
+    color: #ffffff;
   }
   &.form-control-lg {
     padding: 0.94rem .75rem;
@@ -58,15 +59,18 @@ select {
     padding: .4375rem .75rem;
     border: 0;
     outline: 1px solid #322f2f;
-    color: $input-placeholder-color;
+    // color: $input-placeholder-color;
+    color: #ffffffcd;
     &:focus {
       outline: 1px solid $border-color;
+      color: #ffffff;
     }
     @each $color, $value in $theme-colors {
       &.border-#{$color} {
         outline: 1px solid $value;
         &:focus {
           outline: 1px solid $value;
+          color: #ffffff;
         }
       }
     }

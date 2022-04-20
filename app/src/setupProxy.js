@@ -1,10 +1,10 @@
 const { createProxyMiddleware } = require('http-proxy-middleware')
 
 const proxy = {
-    target: 'http://motiro-okara:10000',
+    target: 'http://localhost:10000',
     changeOrigin: true,
     pathRewrite: {'^/api':''},
-    headers: {"Authorization": "Token eaf70ab4350ca3e14b2761e1e9f0bfe4f524f438"},
+    headers: {"Authorization": "Token e9e9a386d2e053ac1ba3ef45c2efe09a97183133"},
     logLevel: 'debug',
 }
 

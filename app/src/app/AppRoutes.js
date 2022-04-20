@@ -25,8 +25,11 @@ const Register1 = lazy(() => import('./user-pages/Register'));
 
 const ProcessDashboard = lazy(() => import('./process/ProcessDashboard'));
 const ProcessGoalManter = lazy(() => import('./process-goal/ProcessGoalManter'));
+const AgentList = lazy(() => import('./agent/AgentList'));
+const AgentDetail = lazy(() => import('./agent/AgentDetail'));
 const AgentTypeList = lazy(() => import('./agent-type/AgentTypeList'));
 const AgentSpecialtyList = lazy(() => import('./agent-specialty/AgentSpecialtyList'));
+const DesireList  = lazy(() => import('./desire/DesireList'));
 
 
 class AppRoutes extends Component {
@@ -57,11 +60,16 @@ class AppRoutes extends Component {
           <Route path="/error-pages/error-404" component={ Error404 } />
           <Route path="/error-pages/error-500" component={ Error500 } />
           
+          
           <Route path="/basic-records/agent-type" component={ AgentTypeList } />
           <Route path="/basic-records/agent-specialty" component={ AgentSpecialtyList } />
           <Route path="/basic-records/process-goal" component={ ProcessGoalManter } />
+          <Route path="/basic-records/desire" component={ DesireList } />
+          <Route path="/agents/:id" component={ AgentDetail } />
+          <Route path="/agents" component={ AgentList } />
+          
           <Route path="/motiro" component={ ProcessDashboard } />
-
+          
           <Redirect to="/motiro" />
         </Switch>
       </Suspense>

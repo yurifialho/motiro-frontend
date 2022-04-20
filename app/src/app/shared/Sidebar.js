@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { Collapse, Dropdown } from 'react-bootstrap';
+import { Collapse } from 'react-bootstrap';
 
 class Sidebar extends Component {
 
@@ -55,8 +55,15 @@ class Sidebar extends Component {
           <li className="nav-item nav-category">
             <span className="nav-link">Menu</span>
           </li>
+          <li className={ this.isPathActive('/motiro') ? 'nav-item menu-items active' : 'nav-item menu-items' }>
+            <Link className="nav-link" to="/motiro">
+              <span className="menu-icon"><i className="mdi mdi-speedometer"></i></span>
+              <span className="menu-title">Dashboard</span>
+            </Link>
+          </li>
           <li className={ this.isPathActive('/basic-records') ? 'nav-item menu-items active' : 'nav-item menu-items' }>
             <div className={ this.state.basicRecordsOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('basicRecordsOpen') } data-toggle="collapse">
+              <span className="menu-icon"><i className="mdi mdi-database"></i></span>
               <span className="menu-title">Basic Records</span>
               <i className="menu-arrow"></i>
             </div>
@@ -65,10 +72,17 @@ class Sidebar extends Component {
                 <ul className="nav flex-column sub-menu">
                   <li className="nav-item"><Link className={ this.isPathActive('/basic-records/agent-type') ? 'nav-link active' : 'nav-link' } to="/basic-records/agent-type">Agent Type</Link></li>
                   <li className="nav-item"><Link className={ this.isPathActive('/basic-records/agent-specialty') ? 'nav-link active' : 'nav-link' } to="/basic-records/agent-specialty">Agent Specialty</Link></li>
+                  <li className="nav-item"><Link className={ this.isPathActive('/basic-records/desire') ? 'nav-link active' : 'nav-link' } to="/basic-records/desire">Desire</Link></li>
                   <li className="nav-item"> <Link className={ this.isPathActive('/basic-records/process-goal') ? 'nav-link active' : 'nav-link' } to="/basic-records/process-goal">Process Goal</Link></li>
                 </ul>
               </div>
             </Collapse>
+          </li>
+          <li className={ this.isPathActive('/agents') ? 'nav-item menu-items active' : 'nav-item menu-items' }>
+            <Link className="nav-link" to="/agents">
+              <span className="menu-icon"><i className="mdi mdi-account"></i></span>
+              <span className="menu-title">Agents</span>
+            </Link>
           </li>
         </ul>
       </nav>

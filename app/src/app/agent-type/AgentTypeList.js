@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { Modal, Form, Alert } from 'react-bootstrap';
 import AgentTypeService from '../apps/services/AgentTypeService';
 import { Truncate } from '../apps/util/Truncate';
-
+import cogoToast from 'cogo-toast';
 
 export class AgentTypeList extends Component {
-
+    state = {}
     constructor(props){
         super(props)
         this.state = {
@@ -28,18 +28,23 @@ export class AgentTypeList extends Component {
           let ret = await AgentTypeService.list();
           this.setState({agentTypes: ret.data, agentType: {}});
         } catch(error) {
-          console.log(error)
-          alert("Não foi possível listar")
+          console.log(error);
+          cogoToast.error("Cannot load the agent types list");
         }
     }
 
     async deleteAgentType(id){
         try {
           let ret = await AgentTypeService.delete(id);
-          this.loadAgentTypes();
+          if (ret.status === 204) {
+            cogoToast.success("Agent Type Deleted");
+            this.loadAgentTypes();
+          } else {
+            cogoToast.error("Cannot exclude the agent type");
+          }          
         } catch(error) {
           console.log(error)
-          alert("Não foi possivel excluir!")
+          cogoToast.error("Cannot exclude the agent type");
         }
     }
 
@@ -56,11 +61,12 @@ export class AgentTypeList extends Component {
             if (ret.status === 200 ||  ret.status === 201) {
                 this.loadAgentTypes();
                 this.showModal(false)
+                cogoToast.success("Agent Type saved")
             }
             
          } catch(error) {
             console.log(error)
-            alert("Não foi possivel criar!")
+            cogoToast.error("Cannot create agent type");
         }
     }
 
@@ -73,7 +79,7 @@ export class AgentTypeList extends Component {
             }            
          } catch(error) {
             console.log(error)
-            alert("Não foi possivel obter dados!")
+            cogoToast.error("Cannot get agent type data");
         }
     }
 
@@ -100,10 +106,8 @@ export class AgentTypeList extends Component {
 
     render() {
         return (
-        <div className="col-lg-12 grid-margin stretch-card">
-             
-        <div className="card">
-       
+        <div className="col-lg-12 grid-margin stretch-card">             
+        <div className="card">       
             <div className="card-body">
             <div className="d-flex flex-row justify-content-between">
                 <h4 className="card-title">Agent Type</h4>

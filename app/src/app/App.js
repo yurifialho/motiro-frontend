@@ -6,13 +6,13 @@ import Navbar from './shared/Navbar';
 import Sidebar from './shared/Sidebar';
 import Footer from './shared/Footer';
 import { withTranslation } from "react-i18next";
-import axios from 'axios';
 
 class App extends Component {
   state = {}
   componentDidMount() {
     this.onRouteChanged();
   }
+
   render () {
     let navbarComponent = !this.state.isFullPageLayout ? <Navbar/> : '';
     let sidebarComponent = !this.state.isFullPageLayout ? <Sidebar/> : '';
@@ -24,7 +24,7 @@ class App extends Component {
           { navbarComponent }
           <div className="main-panel">
             <div className="content-wrapper">
-              <AppRoutes/>
+                <AppRoutes/>
             </div>
             { footerComponent }
           </div>
