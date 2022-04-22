@@ -24,9 +24,14 @@ const ProcessService = {
         return axios.post(endpoint, data)
     }, 
 
-    async edit(id, data) {
-        const endpoint = apiUrl + id + "/"
+    async edit(data) {
+        const endpoint = apiUrl + data.id + "/"
         return axios.put(endpoint, data)
+    },
+
+    async getActivities(id) {
+        const endpoint = apiUrl + id + "/activities"
+        return axios.get(endpoint)
     }
 }
 

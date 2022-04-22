@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import { Modal, Form, Alert } from 'react-bootstrap';
-import AgentTypeService from '../apps/services/AgentTypeService';
+import { Modal, Form } from 'react-bootstrap';
+import ActivityGoalService from '../apps/services/ActivityGoalService';
 import { Truncate } from '../apps/util/Truncate';
 import cogoToast from 'cogo-toast';
 
-export class AgentTypeList extends Component {
-
+export class ActivityGoalList extends Component {
+    
     constructor(props){
         super(props)
         this.state = {
           modalShow: false,
-          agentType: {},
-          agentTypes: []
+          activityGoal: {},
+          listActivityGoal: []
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -19,87 +19,87 @@ export class AgentTypeList extends Component {
     }
     
     componentDidMount(){
-       this.loadAgentTypes();
+       this.loadActivityGoals();
     }
 
-    async loadAgentTypes(){
+    async loadActivityGoals(){
         try {
-          let ret = await AgentTypeService.list();
-          this.setState({agentTypes: ret.data, agentType: {}});
+          let ret = await ActivityGoalService.list();
+          this.setState({listActivityGoal: ret.data, activityGoal: {}});
         } catch(error) {
-          console.log(error);
-          cogoToast.error("Cannot load the agent types list");
+          console.error(error);
+          cogoToast.error("Could not to get data list.");
         }
     }
 
-    async deleteAgentType(id){
+    async deleteActivityGoal(id){
         try {
-          let ret = await AgentTypeService.delete(id);
+          let ret = await ActivityGoalService.delete(id);
           if (ret.status === 204) {
-            cogoToast.success("Agent Type Deleted");
-            this.loadAgentTypes();
+            cogoToast.success("Activity Goal was deleted");
+            this.loadActivityGoals();
           } else {
-            cogoToast.error("Cannot exclude the agent type");
+            cogoToast.error("Could not delete");
           }          
         } catch(error) {
           console.log(error)
-          cogoToast.error("Cannot exclude the agent type");
+          cogoToast.error("Could not delete");
         }
     }
 
-    async createAgentType() {
+    async save() {
         try {
-            let agentType = this.state.agentType;
+            let goal = this.state.activityGoal;
             let ret = null;
-            if (agentType.id) {
-                ret = await AgentTypeService.edit(agentType);
+            if (goal.id) {
+                ret = await ActivityGoalService.edit(goal);
             } else {
-                ret = await AgentTypeService.create(agentType);
+                ret = await ActivityGoalService.create(goal);
             }
             
             if (ret.status === 200 ||  ret.status === 201) {
-                this.loadAgentTypes();
+                this.loadActivityGoals();
                 this.showModal(false)
-                cogoToast.success("Agent Type saved")
+                cogoToast.success("Activity Goal saved")
             }
             
          } catch(error) {
             console.log(error)
-            cogoToast.error("Cannot create agent type");
+            cogoToast.error("Could not to save");
         }
     }
 
-    async editAgentType(id) {
+    async edit(id) {
         try {
-            let ret = await AgentTypeService.getOne(id)
+            let ret = await ActivityGoalService.getOne(id)
             if (ret.status === 200) {
-                this.setState({agentType: ret.data})
+                this.setState({activityGoal: ret.data})
                 this.showModal(true)
             }            
          } catch(error) {
             console.log(error)
-            cogoToast.error("Cannot get agent type data");
+            cogoToast.error("Could not to get data");
         }
     }
 
     showModal(val) {
         if (!val){
-            this.setState({agentType: {}})
+            this.setState({activityGoal: {}})
         }
         this.setState({modalShow: val})        
     }
 
     handleChange(event) {
         const obj = event.target
-        if (obj.id === 'agentNameInput') {
-            let agent = this.state.agentType
-            agent.name = obj.value
-            this.setState({agentType: agent})
+        if (obj.id === 'goalNameInput') {
+            let goal = this.state.activityGoal
+            goal.name = obj.value
+            this.setState({activityGoal: goal})
         }
-        if (obj.id === 'agentDescriptionInput') {
-            let agent = this.state.agentType
-            agent.description = obj.value
-            this.setState({agentType: agent})
+        if (obj.id === 'goalDescriptionInput') {
+            let goal = this.state.activityGoal
+            goal.description = obj.value
+            this.setState({activityGoal: goal})
         }
     }
 
@@ -109,7 +109,7 @@ export class AgentTypeList extends Component {
         <div className="card">       
             <div className="card-body">
             <div className="d-flex flex-row justify-content-between">
-                <h4 className="card-title">Agent Type</h4>
+                <h4 className="card-title">Activity Goal</h4>
                 <button type="button" className="btn btn-success" onClick={ () => this.showModal(true) }>
                     <i className="mdi mdi-plus-circle-outline"></i>
                     Add
@@ -122,21 +122,23 @@ export class AgentTypeList extends Component {
                     <th> # </th>
                     <th> Name </th>
                     <th> Description </th>
+                    <th> Linked to </th>
                     <th> Actions </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {this.state.agentTypes.map( type => (
-                    <tr key={ "agenttype-id-"+type.id } >
-                        <td> { type.id } </td>
-                        <td> { type.name } </td>
-                        <td> <Truncate text={type.description} size={20}/> </td>
+                    {this.state.listActivityGoal.map( goal => (
+                    <tr key={ "activitygoal-id-"+goal.id } >
+                        <td> { goal.id } </td>
+                        <td> { goal.name } </td>
+                        <td> <Truncate text={goal.description} size={20}/> </td>
+                        <td> { goal.activity } </td>
                         <td>
                         <div className="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" className="btn btn-primary" onClick={() => this.editAgentType(type.id)}>
+                            <button type="button" className="btn btn-primary" onClick={() => this.edit(goal.id)}>
                                 <i className="mdi mdi-lead-pencil"></i>
                             </button>
-                            <button type="button" className="btn btn-danger" onClick={() => this.deleteAgentType(type.id)} >
+                            <button type="button" className="btn btn-danger" onClick={() => this.deleteActivityGoal(goal.id)} >
                                 <i className="mdi mdi-delete-forever"></i>
                             </button>
                         </div>
@@ -152,19 +154,19 @@ export class AgentTypeList extends Component {
             <div className="card">
                 <div className="card-body">
                 <h4 className="card-title">
-                    { this.state.agentType.id ? "(#"+this.state.agentType.id+") " : "" } 
-                    Agent Type 
-                    { this.state.agentType.name ? " - "+this.state.agentType.name : ""} 
+                    { this.state.activityGoal.id ? "(#"+this.state.activityGoal.id+") " : "" } 
+                    Activity Goal
+                    { this.state.activityGoal.name ? " - "+this.state.activityGoal.name : ""} 
                 </h4>
                 <div className="table-responsive">
                     <Form onSubmit={ event => event.preventDefault() }>
                         <Form.Group>
-                            <label htmlFor="agentNameInput">Name</label>
-                            <Form.Control type="text" id="agentNameInput" placeholder="Agent Type Name" value={this.state.agentType.name || ''} onChange={this.handleChange} required />
+                            <label htmlFor="goalNameInput">Name</label>
+                            <Form.Control type="text" id="goalNameInput" placeholder="Goal Name" value={this.state.activityGoal.name || ''} onChange={this.handleChange} required />
                         </Form.Group>
                         <Form.Group>
-                            <label htmlFor="agentDescriptionInput">Description</label>
-                            <Form.Control as="textarea" id="agentDescriptionInput" row={4} value={this.state.agentType.description || ''} onChange={this.handleChange}/>
+                            <label htmlFor="goalDescriptionInput">Description</label>
+                            <Form.Control as="textarea" id="goalDescriptionInput" row={4} value={this.state.activityGoal.description || ''} onChange={this.handleChange}/>
                         </Form.Group>
                     </Form>
                 </div>
@@ -175,7 +177,7 @@ export class AgentTypeList extends Component {
                     <i className="mdi mdi-window-close"></i>
                     Cancel
                 </button>
-                <button type="button" className="btn btn-primary" onClick={ () => this.createAgentType()}>
+                <button type="button" className="btn btn-primary" onClick={ () => this.save()}>
                     <i className="mdi mdi-content-save"></i>
                     Save
                 </button>
@@ -187,4 +189,4 @@ export class AgentTypeList extends Component {
 
 }
 
-export default AgentTypeList;
+export default ActivityGoalList;

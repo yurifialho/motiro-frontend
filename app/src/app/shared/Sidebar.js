@@ -70,6 +70,7 @@ class Sidebar extends Component {
             <Collapse in={ this.state.basicRecordsOpen }>
               <div>
                 <ul className="nav flex-column sub-menu">
+                  <li className="nav-item"><Link className={ this.isPathActive('/basic-records/activity-goal') ? 'nav-link active' : 'nav-link' } to="/basic-records/activity-goal">Activity Goal</Link></li>  
                   <li className="nav-item"><Link className={ this.isPathActive('/basic-records/agent-type') ? 'nav-link active' : 'nav-link' } to="/basic-records/agent-type">Agent Type</Link></li>
                   <li className="nav-item"><Link className={ this.isPathActive('/basic-records/agent-specialty') ? 'nav-link active' : 'nav-link' } to="/basic-records/agent-specialty">Agent Specialty</Link></li>
                   <li className="nav-item"><Link className={ this.isPathActive('/basic-records/desire') ? 'nav-link active' : 'nav-link' } to="/basic-records/desire">Desire</Link></li>
@@ -82,6 +83,12 @@ class Sidebar extends Component {
             <Link className="nav-link" to="/agents">
               <span className="menu-icon"><i className="mdi mdi-account"></i></span>
               <span className="menu-title">Agents</span>
+            </Link>
+          </li>
+          <li className={ this.isPathActive('/process') ? 'nav-item menu-items active' : 'nav-item menu-items' }>
+            <Link className="nav-link" to="/process">
+              <span className="menu-icon"><i className="mdi mdi-shape-plus"></i></span>
+              <span className="menu-title">Process</span>
             </Link>
           </li>
         </ul>

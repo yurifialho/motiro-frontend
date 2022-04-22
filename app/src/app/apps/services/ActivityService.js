@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const apiUrl = "/api/kipco/processgoal/";
+const apiUrl = "/api/kipco/activity/";
 
-const ProcessGoalService = {
+const ActivityService = {
     
     async getOne(id) {
         const endpoint = apiUrl + id + "/"
@@ -30,4 +30,4 @@ const ProcessGoalService = {
     }
 }
 
-export default ProcessGoalService;
+export default ActivityService;
