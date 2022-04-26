@@ -33,7 +33,8 @@ class Sidebar extends Component {
     });
 
     const dropdownPaths = [
-      {path: '/basic-records', state: 'basicRecordsOpen'}
+      {path: '/basic-records', state: 'basicRecordsOpen'},
+      {path: '/assessment', state: 'assessmentRecordsOpen'}
     ];
 
     dropdownPaths.forEach((obj => {
@@ -90,6 +91,21 @@ class Sidebar extends Component {
               <span className="menu-icon"><i className="mdi mdi-shape-plus"></i></span>
               <span className="menu-title">Process</span>
             </Link>
+          </li>
+          <li className={ this.isPathActive('/assessment') ? 'nav-item menu-items active' : 'nav-item menu-items' }>
+            <div className={ this.state.assessmentRecordsOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('assessmentRecordsOpen') } data-toggle="collapse">
+              <span className="menu-icon"><i className="mdi mdi-database"></i></span>
+              <span className="menu-title">Assessment</span>
+              <i className="menu-arrow"></i>
+            </div>
+            <Collapse in={ this.state.assessmentRecordsOpen }>
+              <div>
+                <ul className="nav flex-column sub-menu">
+                  <li className="nav-item"><Link className={ this.isPathActive('/assessment/criteria') ? 'nav-link active' : 'nav-link' } to="/assessment/criteria">Criteria</Link></li>  
+                  <li className="nav-item"><Link className={ this.isPathActive('/assessment/quiz') ? 'nav-link active' : 'nav-link' } to="/assessment/quiz">Quiz</Link></li>
+                </ul>
+              </div>
+            </Collapse>
           </li>
         </ul>
       </nav>

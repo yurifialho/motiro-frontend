@@ -33,6 +33,8 @@ const AgentDetail = lazy(() => import('./agent/AgentDetail'));
 const AgentTypeList = lazy(() => import('./agent-type/AgentTypeList'));
 const AgentSpecialtyList = lazy(() => import('./agent-specialty/AgentSpecialtyList'));
 const DesireList  = lazy(() => import('./desire/DesireList'));
+const CriteriaList = lazy(() => import('./assessment/criteria/CriteriaList'));
+const QuizList = lazy(() => import('./assessment/quiz/QuizList'));
 
 
 class AppRoutes extends Component {
@@ -72,7 +74,9 @@ class AppRoutes extends Component {
           <Route path="/agents" component={ AgentList } />
           <Route path="/process/:id" component={ ProcessDetail } />
           <Route path="/process" component={ ProcessList } />
-          
+          <Route path="/assessment/criteria" component={ CriteriaList } />
+          <Route path="/assessment/quiz" component={ QuizList } />
+
           <Route path="/motiro" component={ ProcessDashboard } />
           
           <Redirect to="/motiro" />

@@ -35,10 +35,10 @@ export class AgentDetail extends Component {
 
     componentDidMount() {
         let id = (this.state.agent.id || this.props.match.params.id )
-        if (id === 0) {
+        if (id == 0) {
             this.setState({isEdit: false})
         } else {
-            this.setState({isEdit: true})
+            
             this.loadAgent(id);
         }
         this.loadAgentTypes();
@@ -72,7 +72,7 @@ export class AgentDetail extends Component {
                     }
                 }
                 console.log(agent);
-                this.setState({agent: agent});
+                this.setState({agent: agent, isEdit: true});
             } else { 
                 cogoToast.error("Could not to get data.");    
             }
@@ -106,7 +106,7 @@ export class AgentDetail extends Component {
             }
             
             if (ret.status === 200 ||  ret.status === 201) {
-                let id = (this.state.agent.id || this.props.match.params.id )
+                let id = ret.data.id;
                 this.loadAgent(id);
                 cogoToast.success("Agent saved")
             }
