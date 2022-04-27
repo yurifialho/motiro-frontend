@@ -367,8 +367,20 @@ export class AgentDetail extends Component {
                 <div className="col-lg-4 grid-margin stretch-card">
                 <div className="card">
                 <div className="card-body">
-                    <h4 className="card-title">Agent Details</h4>
+                    <h4 className="card-title">Knowledge/Belief</h4>
                     <div className="table-responsive">
+                        <table className="table">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 </div>

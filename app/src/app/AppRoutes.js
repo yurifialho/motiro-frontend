@@ -35,7 +35,8 @@ const AgentSpecialtyList = lazy(() => import('./agent-specialty/AgentSpecialtyLi
 const DesireList  = lazy(() => import('./desire/DesireList'));
 const CriteriaList = lazy(() => import('./assessment/criteria/CriteriaList'));
 const QuizList = lazy(() => import('./assessment/quiz/QuizList'));
-
+const SocializationList = lazy(() => import('./socialization/SocializationList'));
+const SocializationDetail = lazy(() => import('./socialization/SocializationDetail'));
 
 class AppRoutes extends Component {
   render () {
@@ -76,6 +77,8 @@ class AppRoutes extends Component {
           <Route path="/process" component={ ProcessList } />
           <Route path="/assessment/criteria" component={ CriteriaList } />
           <Route path="/assessment/quiz" component={ QuizList } />
+          <Route path="/socialization/:id" component={ SocializationDetail } />>
+          <Route path="/socialization" component={ SocializationList } />>
 
           <Route path="/motiro" component={ ProcessDashboard } />
           

@@ -92,6 +92,18 @@ class Sidebar extends Component {
               <span className="menu-title">Process</span>
             </Link>
           </li>
+          <li className={ this.isPathActive('/socialization') ? 'nav-item menu-items active' : 'nav-item menu-items' }>
+            <Link className="nav-link" to="/socialization">
+              <span className="menu-icon"><i className="mdi mdi-share-variant"></i></span>
+              <span className="menu-title">Socialization</span>
+            </Link>
+          </li>
+          <li className={ this.isPathActive('/knowledge') ? 'nav-item menu-items active' : 'nav-item menu-items' }>
+            <Link className="nav-link" to="/knowledge">
+              <span className="menu-icon"><i className="mdi mdi-weather-cloudy"></i></span>
+              <span className="menu-title">Knowledge</span>
+            </Link>
+          </li>
           <li className={ this.isPathActive('/assessment') ? 'nav-item menu-items active' : 'nav-item menu-items' }>
             <div className={ this.state.assessmentRecordsOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('assessmentRecordsOpen') } data-toggle="collapse">
               <span className="menu-icon"><i className="mdi mdi-database"></i></span>
