@@ -76,10 +76,14 @@ export class SocializationDetail extends Component {
         try {
             let socialization = this.state.socialization;
             let ret = null;
+            let socDTO = {
+                name: socialization.name,
+                description: socialization.description
+            }
             if (socialization.id) {
-                ret = await SocializationService.edit(socialization);
+                ret = await SocializationService.edit(socDTO);
             } else {
-                ret = await SocializationService.create(socialization);
+                ret = await SocializationService.create(socDTO);
             }
             
             if (ret.status === 200 ||  ret.status === 201) {

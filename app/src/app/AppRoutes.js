@@ -37,6 +37,8 @@ const CriteriaList = lazy(() => import('./assessment/criteria/CriteriaList'));
 const QuizList = lazy(() => import('./assessment/quiz/QuizList'));
 const SocializationList = lazy(() => import('./socialization/SocializationList'));
 const SocializationDetail = lazy(() => import('./socialization/SocializationDetail'));
+const DocumentList = lazy(() => import('./document/DocumentList'));
+const DataObjectList = lazy(() => import('./dataobject/DataObjectList'));
 
 class AppRoutes extends Component {
   render () {
@@ -77,8 +79,10 @@ class AppRoutes extends Component {
           <Route path="/process" component={ ProcessList } />
           <Route path="/assessment/criteria" component={ CriteriaList } />
           <Route path="/assessment/quiz" component={ QuizList } />
-          <Route path="/socialization/:id" component={ SocializationDetail } />>
-          <Route path="/socialization" component={ SocializationList } />>
+          <Route path="/socialization/:id" component={ SocializationDetail } />
+          <Route path="/socialization" component={ SocializationList } />
+          <Route path="/know-structure/document" component={ DocumentList } />
+          <Route path="/know-structure/data-object" component={ DataObjectList } />
 
           <Route path="/motiro" component={ ProcessDashboard } />
           

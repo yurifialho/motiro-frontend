@@ -34,7 +34,8 @@ class Sidebar extends Component {
 
     const dropdownPaths = [
       {path: '/basic-records', state: 'basicRecordsOpen'},
-      {path: '/assessment', state: 'assessmentRecordsOpen'}
+      {path: '/assessment', state: 'assessmentRecordsOpen'},
+      {path: '/know-structure', state: 'knowStructureOpen'}
     ];
 
     dropdownPaths.forEach((obj => {
@@ -76,6 +77,21 @@ class Sidebar extends Component {
                   <li className="nav-item"><Link className={ this.isPathActive('/basic-records/agent-specialty') ? 'nav-link active' : 'nav-link' } to="/basic-records/agent-specialty">Agent Specialty</Link></li>
                   <li className="nav-item"><Link className={ this.isPathActive('/basic-records/desire') ? 'nav-link active' : 'nav-link' } to="/basic-records/desire">Desire</Link></li>
                   <li className="nav-item"> <Link className={ this.isPathActive('/basic-records/process-goal') ? 'nav-link active' : 'nav-link' } to="/basic-records/process-goal">Process Goal</Link></li>
+                </ul>
+              </div>
+            </Collapse>
+          </li>
+          <li className={ this.isPathActive('/know-structure') ? 'nav-item menu-items active' : 'nav-item menu-items' }>
+            <div className={ this.state.knowStructureOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('knowStructureOpen') } data-toggle="collapse">
+              <span className="menu-icon"><i className="mdi mdi-database"></i></span>
+              <span className="menu-title">Knowledge Structure</span>
+              <i className="menu-arrow"></i>
+            </div>
+            <Collapse in={ this.state.knowStructureOpen }>
+              <div>
+                <ul className="nav flex-column sub-menu">
+                  <li className="nav-item"><Link className={ this.isPathActive('/know-structure/document') ? 'nav-link active' : 'nav-link' } to="/know-structure/document">Document</Link></li>
+                  <li className="nav-item"><Link className={ this.isPathActive('/know-structure/data-object') ? 'nav-link active' : 'nav-link' } to="/know-structure/data-object">Data Object</Link></li>
                 </ul>
               </div>
             </Collapse>
