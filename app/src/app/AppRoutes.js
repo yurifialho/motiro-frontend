@@ -38,6 +38,7 @@ const QuizList = lazy(() => import('./assessment/quiz/QuizList'));
 const SocializationList = lazy(() => import('./socialization/SocializationList'));
 const SocializationDetail = lazy(() => import('./socialization/SocializationDetail'));
 const DocumentList = lazy(() => import('./document/DocumentList'));
+const DocumentDetail = lazy(() => import('./document/DocumentDetail'));
 const DataObjectList = lazy(() => import('./dataobject/DataObjectList'));
 
 class AppRoutes extends Component {
@@ -81,6 +82,7 @@ class AppRoutes extends Component {
           <Route path="/assessment/quiz" component={ QuizList } />
           <Route path="/socialization/:id" component={ SocializationDetail } />
           <Route path="/socialization" component={ SocializationList } />
+          <Route path="/know-structure/document/:id" component={ DocumentDetail } />
           <Route path="/know-structure/document" component={ DocumentList } />
           <Route path="/know-structure/data-object" component={ DataObjectList } />
 

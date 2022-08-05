@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import { Modal, Form, Badge } from 'react-bootstrap';
 import DocumentService from '../apps/services/DocumentService';
+import Truncate from '../apps/util/Truncate';
+import SemanticBadges from '../apps/util/SemanticBadges';
 import cogoToast from 'cogo-toast';
 
 export class DocumentList extends Component {
@@ -93,7 +96,13 @@ export class DocumentList extends Component {
         switch (obj.id) {
             case 'documentNameInput': {
                 let doc = this.state.obj
-                doc.name = obj.value
+                doc.l_name = obj.value
+                this.setState({obj: doc})
+                break;
+            }
+            case 'documentDescriptionInput': {
+                let doc = this.state.obj
+                doc.l_description = obj.value
                 this.setState({obj: doc})
                 break;
             }
@@ -119,7 +128,8 @@ export class DocumentList extends Component {
                 <thead>
                     <tr>
                     <th> # </th>
-                    <th> Nome </th>
+                    <th> Name </th>
+                    <th> Description </th>
                     <th> Status </th>
                     <th> Actions </th>
                     </tr>
@@ -127,20 +137,17 @@ export class DocumentList extends Component {
                 <tbody>
                     {this.state.listObj.map( obj => (
                     <tr key={ "criteria-id-"+obj.id } >
-                        <td> { obj.id } </td>
-                        <td> { obj.name } </td>
-                        <td>
-                            <h6>
-                            {obj.badges.map( badge => (
-                                <>
-                                {( badge == "ODD__Goal_Relevant") && <Badge pill variant="warning">Goal Relevant</Badge>}
-                                {( badge == "ODD__Unavailable") && <Badge pill variant="danger">Unavailable</Badge>}
-                                </>
-                            ))}
-                            </h6>
-                        </td>
+                        <td> <Truncate text={obj.id} size={8} complement=" "/> </td>
+                        <td> { obj.l_name } </td>
+                        <td> <Truncate text={obj.l_description} size={10} /> </td>
+                        <td> <SemanticBadges badges={obj.badges} /> </td>
                         <td>
                         <div className="btn-group" role="group" aria-label="action-group">
+                            <Link to={"/know-structure/document/"+obj.id}>
+                                <button type="button" className="btn btn-warning">
+                                    <i className="mdi mdi-eye"></i>
+                                </button>
+                            </Link>
                             <button type="button" className="btn btn-primary" onClick={() => this.edit(obj.id)}>
                                 <i className="mdi mdi-lead-pencil"></i>
                             </button>
@@ -167,7 +174,11 @@ export class DocumentList extends Component {
                     <Form onSubmit={ event => event.preventDefault() }>
                         <Form.Group>
                             <label htmlFor="documentNameInput">Name</label>
-                            <Form.Control type="text" id="documentNameInput" placeholder="Name" value={this.state.obj.name || ''} onChange={this.handleChange} required />
+                            <Form.Control type="text" id="documentNameInput" placeholder="Name" value={this.state.obj.l_name || ''} onChange={this.handleChange} required />
+                        </Form.Group>
+                        <Form.Group>
+                            <label htmlFor="documentDescriptionInput">Description</label>
+                            <Form.Control as="textarea" id="documentDescriptionInput" row={4} value={this.state.obj.l_description || ''} onChange={this.handleChange}/>
                         </Form.Group>
                     </Form>
                 </div>

@@ -98,12 +98,12 @@ export class AgentSpecialtyList extends Component {
         const obj = event.target
         if (obj.id === 'agentNameInput') {
             let agent = this.state.agentSpecialty
-            agent.name = obj.value
+            agent.l_name = obj.value
             this.setState({agentSpecialty: agent})
         }
         if (obj.id === 'agentDescriptionInput') {
             let agent = this.state.agentSpecialty
-            agent.description = obj.value
+            agent.l_description = obj.value
             this.setState({agentSpecialty: agent})
         }
     }
@@ -133,9 +133,9 @@ export class AgentSpecialtyList extends Component {
                 <tbody>
                     {this.state.agentSpecialties.map( specialty => (
                     <tr key={ "agentspecialty-id-"+specialty.id } >
-                        <td> { specialty.id } </td>
-                        <td> { specialty.name } </td>
-                        <td> <Truncate text={specialty.description} size={20}/> </td>
+                        <td> <Truncate text={specialty.id} size={8} complement=" "/> </td>
+                        <td> { specialty.l_name } </td>
+                        <td> <Truncate text={specialty.l_description} size={20}/> </td>
                         <td>
                         <div className="btn-group" role="group" aria-label="Basic example">
                             <button type="button" className="btn btn-primary" onClick={() => this.editAgentSpecialty(specialty.id)}>
@@ -159,17 +159,17 @@ export class AgentSpecialtyList extends Component {
                 <h4 className="card-title">
                     { this.state.agentSpecialty.id ? "(#"+this.state.agentSpecialty.id+") " : "" } 
                     Agent Specialty
-                    { this.state.agentSpecialty.name ? " - "+this.state.agentSpecialty.name : ""} 
+                    { this.state.agentSpecialty.l_name ? " - "+this.state.agentSpecialty.l_name : ""} 
                 </h4>
                 <div className="table-responsive">
                     <Form onSubmit={ event => event.preventDefault() }>
                         <Form.Group>
                             <label htmlFor="agentNameInput">Name</label>
-                            <Form.Control type="text" id="agentNameInput" placeholder="Agent Specialty Name" value={this.state.agentSpecialty.name || ''} onChange={this.handleChange} required />
+                            <Form.Control type="text" id="agentNameInput" placeholder="Agent Specialty Name" value={this.state.agentSpecialty.l_name || ''} onChange={this.handleChange} required />
                         </Form.Group>
                         <Form.Group>
                             <label htmlFor="agentDescriptionInput">Description</label>
-                            <Form.Control as="textarea" id="agentDescriptionInput" row={4} value={this.state.agentSpecialty.description || ''} onChange={this.handleChange}/>
+                            <Form.Control as="textarea" id="agentDescriptionInput" row={4} value={this.state.agentSpecialty.l_description || ''} onChange={this.handleChange}/>
                         </Form.Group>
                     </Form>
                 </div>

@@ -93,12 +93,12 @@ export class ActivityGoalList extends Component {
         const obj = event.target
         if (obj.id === 'goalNameInput') {
             let goal = this.state.activityGoal
-            goal.name = obj.value
+            goal.l_name = obj.value
             this.setState({activityGoal: goal})
         }
         if (obj.id === 'goalDescriptionInput') {
             let goal = this.state.activityGoal
-            goal.description = obj.value
+            goal.l_description = obj.value
             this.setState({activityGoal: goal})
         }
     }
@@ -129,9 +129,9 @@ export class ActivityGoalList extends Component {
                 <tbody>
                     {this.state.listActivityGoal.map( goal => (
                     <tr key={ "activitygoal-id-"+goal.id } >
-                        <td> { goal.id } </td>
-                        <td> { goal.name } </td>
-                        <td> <Truncate text={goal.description} size={20}/> </td>
+                        <td> <Truncate text={goal.id} size={8} complement=" "/> </td>
+                        <td> { goal.l_name } </td>
+                        <td> <Truncate text={goal.l_description} size={20}/> </td>
                         <td> { goal.activity } </td>
                         <td>
                         <div className="btn-group" role="group" aria-label="Basic example">
@@ -156,17 +156,17 @@ export class ActivityGoalList extends Component {
                 <h4 className="card-title">
                     { this.state.activityGoal.id ? "(#"+this.state.activityGoal.id+") " : "" } 
                     Activity Goal
-                    { this.state.activityGoal.name ? " - "+this.state.activityGoal.name : ""} 
+                    { this.state.activityGoal.name ? " - "+this.state.activityGoal.l_name : ""} 
                 </h4>
                 <div className="table-responsive">
                     <Form onSubmit={ event => event.preventDefault() }>
                         <Form.Group>
                             <label htmlFor="goalNameInput">Name</label>
-                            <Form.Control type="text" id="goalNameInput" placeholder="Goal Name" value={this.state.activityGoal.name || ''} onChange={this.handleChange} required />
+                            <Form.Control type="text" id="goalNameInput" placeholder="Goal Name" value={this.state.activityGoal.l_name || ''} onChange={this.handleChange} required />
                         </Form.Group>
                         <Form.Group>
                             <label htmlFor="goalDescriptionInput">Description</label>
-                            <Form.Control as="textarea" id="goalDescriptionInput" row={4} value={this.state.activityGoal.description || ''} onChange={this.handleChange}/>
+                            <Form.Control as="textarea" id="goalDescriptionInput" row={4} value={this.state.activityGoal.l_description || ''} onChange={this.handleChange}/>
                         </Form.Group>
                     </Form>
                 </div>

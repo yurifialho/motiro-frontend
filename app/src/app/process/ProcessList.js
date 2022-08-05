@@ -93,12 +93,12 @@ export class ProcessList extends Component {
         const obj = event.target
         if (obj.id === 'processNameInput') {
             let process = this.state.process
-            process.name = obj.value
+            process.l_name = obj.value
             this.setState({process: process})
         }
         if (obj.id === 'processDescriptionInput') {
             let process = this.state.process
-            process.description = obj.value
+            process.l_description = obj.value
             this.setState({process: process})
         }
     }
@@ -138,9 +138,9 @@ export class ProcessList extends Component {
                 <tbody>
                     {this.state.listProcess.map( process => (
                     <tr key={ "process-id-"+process.id } >
-                        <td> { process.id } </td>
-                        <td> { process.name } </td>
-                        <td> <Truncate text={process.description} size={20}/> </td>
+                        <td> <Truncate text={process.id} size={8} complement=" "/> </td>
+                        <td> { process.l_name } </td>
+                        <td> <Truncate text={process.l_description} size={20}/> </td>
                         <td>
                         <div className="btn-group" role="group" aria-label="Basic example">
                             <Link to={"/process/"+process.id}>
@@ -169,17 +169,17 @@ export class ProcessList extends Component {
                 <h4 className="card-title">
                     { this.state.process.id ? "(#"+this.state.process.id+") " : "" } 
                     Process
-                    { this.state.process.name ? " - "+this.state.process.name : ""} 
+                    { this.state.process.l_name ? " - "+this.state.process.l_name : ""} 
                 </h4>
                 <div className="table-responsive">
                     <Form onSubmit={ event => event.preventDefault() }>
                         <Form.Group>
                             <label htmlFor="processNameInput">Name</label>
-                            <Form.Control type="text" id="processNameInput" placeholder="Process Name" value={this.state.process.name || ''} onChange={this.handleChange} required />
+                            <Form.Control type="text" id="processNameInput" placeholder="Process Name" value={this.state.process.l_name || ''} onChange={this.handleChange} required />
                         </Form.Group>
                         <Form.Group>
                             <label htmlFor="processDescriptionInput">Description</label>
-                            <Form.Control as="textarea" id="processDescriptionInput" row={4} value={this.state.process.description || ''} onChange={this.handleChange}/>
+                            <Form.Control as="textarea" id="processDescriptionInput" row={4} value={this.state.process.l_description || ''} onChange={this.handleChange}/>
                         </Form.Group>
                     </Form>
                 </div>

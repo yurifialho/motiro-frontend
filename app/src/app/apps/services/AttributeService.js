@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const apiUrl = "/api/kipco/document/";
+const apiUrl = "/api/kipco/attribute/";
 
-const DocumentService = {
+const AttributeService = {
     
     async getOne(id) {
         const endpoint = apiUrl + id + "/"
@@ -30,9 +30,9 @@ const DocumentService = {
     },
 
     async getBadges(id) {
-        const endpoint = apiUrl + id + "/badges/"
+        const endpoint = apiUrl + id + "/badges"
         return axios.get(endpoint)
     },
 }
 
-export default DocumentService;
+export default AttributeService;

@@ -4,7 +4,7 @@ const proxy = {
     target: 'http://localhost:10000',
     changeOrigin: true,
     pathRewrite: {'^/api':''},
-    headers: {"Authorization": "Token 4d7605ae950d69a79ee00afe970d9941b73ac651"},
+    headers: {"Authorization": "Token f3b029b2ca93a3c8dd1d9286755fe8c83b2b0f6d"},
     logLevel: 'debug',
 }
 

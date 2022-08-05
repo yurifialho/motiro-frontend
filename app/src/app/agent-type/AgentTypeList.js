@@ -93,12 +93,12 @@ export class AgentTypeList extends Component {
         const obj = event.target
         if (obj.id === 'agentNameInput') {
             let agent = this.state.agentType
-            agent.name = obj.value
+            agent.l_name = obj.value
             this.setState({agentType: agent})
         }
         if (obj.id === 'agentDescriptionInput') {
             let agent = this.state.agentType
-            agent.description = obj.value
+            agent.l_description = obj.value
             this.setState({agentType: agent})
         }
     }
@@ -128,9 +128,9 @@ export class AgentTypeList extends Component {
                 <tbody>
                     {this.state.agentTypes.map( type => (
                     <tr key={ "agenttype-id-"+type.id } >
-                        <td> { type.id } </td>
-                        <td> { type.name } </td>
-                        <td> <Truncate text={type.description} size={20}/> </td>
+                        <td> <Truncate text={type.id} size={8} complement=" "/> </td>
+                        <td> { type.l_name } </td>
+                        <td> <Truncate text={type.l_description} size={20}/> </td>
                         <td>
                         <div className="btn-group" role="group" aria-label="Basic example">
                             <button type="button" className="btn btn-primary" onClick={() => this.editAgentType(type.id)}>
@@ -154,17 +154,17 @@ export class AgentTypeList extends Component {
                 <h4 className="card-title">
                     { this.state.agentType.id ? "(#"+this.state.agentType.id+") " : "" } 
                     Agent Type 
-                    { this.state.agentType.name ? " - "+this.state.agentType.name : ""} 
+                    { this.state.agentType.l_name ? " - "+this.state.agentType.l_name : ""} 
                 </h4>
                 <div className="table-responsive">
                     <Form onSubmit={ event => event.preventDefault() }>
                         <Form.Group>
                             <label htmlFor="agentNameInput">Name</label>
-                            <Form.Control type="text" id="agentNameInput" placeholder="Agent Type Name" value={this.state.agentType.name || ''} onChange={this.handleChange} required />
+                            <Form.Control type="text" id="agentNameInput" placeholder="Agent Type Name" value={this.state.agentType.l_name || ''} onChange={this.handleChange} required />
                         </Form.Group>
                         <Form.Group>
                             <label htmlFor="agentDescriptionInput">Description</label>
-                            <Form.Control as="textarea" id="agentDescriptionInput" row={4} value={this.state.agentType.description || ''} onChange={this.handleChange}/>
+                            <Form.Control as="textarea" id="agentDescriptionInput" row={4} value={this.state.agentType.l_description || ''} onChange={this.handleChange}/>
                         </Form.Group>
                     </Form>
                 </div>
